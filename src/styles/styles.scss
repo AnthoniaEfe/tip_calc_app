@@ -51,13 +51,26 @@ main {
   gap:2.5rem;
 }
 
-#grid-container{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  place-items: center;
-  margin:0 auto;
-  gap:2.5rem;
+h1{
+  color: $very-dark-cyan;
+  margin: 2.5rem auto;
+
+  &::before {
+    content: "SPLI";
+    display: block;
+  }
+  
+ &::after {
+    content: "TTER";
+    display: block;
+  }
+}
+
+#card-container{
+  @include flex-center();
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 2.5rem;
   background-color: $white;
   padding: 1.5rem;
   border-radius: 1rem;
@@ -73,7 +86,17 @@ label{
   display: block;
   text-align: left;
   width:100%;
+  position: relative;
 }
+
+.icons{
+  position:  absolute;
+  left: 1rem;
+  top: 50%;
+  font-size: 1.5rem;
+  color: $grayish-cyan;
+}
+
 input{
   width:100%;
   background-color: $very-light-grayish-cyan;
@@ -82,8 +105,9 @@ input{
   box-shadow: none;
   padding:10px;
   font-size: $form-input-font-size;
+  text-align: right;
 
-  &:active, &:focus{
+  &:active, &:focus, &:hover{
     outline:1px solid $light-grayish-cyan;
     color: $dark-grayish-cyan;
   }
@@ -139,6 +163,13 @@ input{
   padding:1rem;
   border-radius: 1rem;
 
+  #tip-calc-container{
+    @include flex-center();
+    flex-direction: column;
+    width:100%;
+    gap:1rem;
+  }
+
   #calc-tip, #calc-total-tip{
     @include flex-space-between();
     flex-direction: row;
@@ -174,7 +205,7 @@ input{
     border-radius: 6px;
     text-transform: uppercase;
 
-    &:hover, :active{
+    &:hover, &:active{
       background-color: $light-grayish-cyan; 
       border: 1px solid $light-grayish-cyan;
       transform: scale(1.01);
@@ -183,6 +214,36 @@ input{
 
 }
 
-@media screen and (min-width: 750x){
+@media screen and (min-width: 750px){
+
+  #card-container{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; 
+
+    form, #tip-container{
+      flex: 1;
+      height: auto;
+    }
+  }
+
+  #tip-container{
+   padding: 2rem;
+   justify-content: space-between;
+
+   #tip-calc-container{
+    gap:1.5rem;
+   }
+
+   .tip-value{
+    font-size: 2.5rem;
+   }
+  }
+
+  #reset-btn{
+    font-size: 1.75rem;
+  }
   
 }
