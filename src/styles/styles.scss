@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+$strong-cyan: hsl(172, 67%, 45%);
+$very-dark-cyan: hsl(183, 100%, 15%);
+$dark-grayish-cyan: hsl(186, 14%, 43%);
+$grayish-cyan: hsl(184, 14%, 56%);
+$light-grayish-cyan: hsl(185, 41%, 84%);
+$very-light-grayish-cyan: hsl(189, 41%, 97%);
+$white: hsl(0, 0%, 100%);
+$form-input-font-size: 24px;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: $dark-grayish-cyan;
+  font-family: Space Mono,sans-serif;
+  font-weight: 700;
+  background-color: hsl(185, 41%, 84%);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-left {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 100vh;
+  width:100%;
+  gap:2.5rem;
+}
+
+#grid-container{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  place-items: center;
+  margin:0 auto;
+  gap:2.5rem;
+  background-color: $white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+form{
+  @include flex-center;
+  flex-direction: column;
+  gap:2rem;
+}
+
+label{
+  display: block;
+  text-align: left;
+  width:100%;
+}
+input{
+  width:100%;
+  background-color: $very-light-grayish-cyan;
+  border-radius: 4px;
+  border:1px solid $very-light-grayish-cyan;
+  box-shadow: none;
+  padding:10px;
+  font-size: $form-input-font-size;
+
+  &:active, &:focus{
+    outline:1px solid $light-grayish-cyan;
+    color: $dark-grayish-cyan;
+  }
+}
+
+.tip-section{
+  @include flex-space-between();
+  max-width:100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:1rem;
+
+  .tip, #custom-tip{
+    width:45%;
+    color: $white;
+    background-color: $very-dark-cyan; 
+    padding:0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: none;
+    border: 1px solid $very-dark-cyan;
+    border-radius: 6px;
+
+    &:hover, &:active{
+      background-color: $light-grayish-cyan;
+      color:$very-dark-cyan;
+      border: 1px solid $light-grayish-cyan;
+    }
+  }
+
+  #custom-tip{
+    background-color: $very-light-grayish-cyan;
+    border:1px solid $very-light-grayish-cyan;
+    box-shadow: none;
+    text-transform: capitalize;
+    text-align:center;
+    color: $very-dark-cyan;
+
+    &:hover, &:active{
+      background-color: $very-light-grayish-cyan;
+    }
+  }
+}
+
+
+
+#tip-container{
+  @include flex-center();
+  flex-direction: column;
+  gap: 2rem;
+  background-color: $very-dark-cyan;
+  width:100%;
+  padding:1rem;
+  border-radius: 1rem;
+
+  #calc-tip, #calc-total-tip{
+    @include flex-space-between();
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .tip-text{
+    @include flex-left();
+    flex-direction: column;
+    gap:0;
+
+    h2{
+      color: $white;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+  }
+
+  .tip-value{
+    font-size: 2rem;
+    color: $strong-cyan;
+  }
+
+  #reset-btn{
+    width:100%;
+    color: $very-dark-cyan;
+    background-color: $strong-cyan; 
+    padding:0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: none;
+    border: 1px solid $strong-cyan;
+    border-radius: 6px;
+    text-transform: uppercase;
+
+    &:hover, :active{
+      background-color: $light-grayish-cyan; 
+      border: 1px solid $light-grayish-cyan;
+      transform: scale(1.01);
+    }
+  }
+
+}
+
+@media screen and (min-width: 750x){
+  
+}
