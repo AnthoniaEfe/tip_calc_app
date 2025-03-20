@@ -106,6 +106,8 @@ input{
   padding:10px;
   font-size: $form-input-font-size;
   text-align: right;
+  font-weight: 600;
+  color: $grayish-cyan;
 
   &:active, &:focus, &:hover{
     outline:1px solid $light-grayish-cyan;

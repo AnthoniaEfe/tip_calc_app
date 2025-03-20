@@ -1,10 +1,30 @@
 import "./styles/styles.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 
 function App() {
 
+  const [bill, setBill] = useState(0);
+  const [customTip, setCustomTip] =  useState("");
+  const [numPeople, setNumPeople] = useState(0);
+  const [tipPercent, setTipPercent] = useState(0)
+  const [totalPerPerson, setTotalPerPerson] = useState("")
+  const [tipPerPerson, setTipPerPerson] = useState("")
+
+  const clearInput=()=>{
+    setBill(0);
+    setCustomTip("Custom");
+    setNumPeople(0);
+  }
+
+  const handleTipButton=(e, percentage)=>{
+    e.preventDefault();
+    setTipPercent(percentage/100);
+    setTipPerPerson((parseFloat(bill)/parseFloat(numPeople)) * parseFloat(tipPercent));
+    setTotalPerPerson((parseFloat(bill)/parseFloat(numPeople)) + parseFloat(tipPerPerson));
+  }
 
   return (
     <>
@@ -13,22 +33,29 @@ function App() {
       <form>
         <label>Bill 
         <FontAwesomeIcon className="icons" icon={faDollarSign} />
-          <input type="number" name="bill-input" id="bill-input" placeholder="0"/>
+          <input type="number" value={bill} placeholder="0" onChange={(e)=>setBill(e.target.value)}/>
        </label>
 
       <div className="tip-section"> 
         <label htmlFor="tip">Select Tip % </label>
-        <button className="tip" name="tip">5%</button>
-        <button className="tip" name="tip">10%</button>
-        <button className="tip" name="tip">15%</button>
-        <button className="tip" name="tip">25%</button>
-        <button className="tip" name="tip">50%</button>
-        <input type="number" name="tip" placeholder="custom" id="custom-tip"/> 
+        <div className="tip-btns">
+       {[5,10,15,25,50].map((percentage)=>(
+        <button 
+        key={percentage}
+        className="tip"
+        onClick={(e)=>{handleTipButton(e, percentage)}}>
+          {percentage}%
+        </button>
+       ))}
+        </div>
+
+        <input type="number" name="tip" placeholder="custom" id="custom-tip"
+         value={customTip} onChange={(e)=>setCustomTip(e.target.value)}/> 
         </div>
     
     <label>Number of People
           <FontAwesomeIcon className="icons" icon={faUser}  />
-          <input type="number" name="people-num" id="people-num" placeholder="5"/>
+          <input type="number" placeholder="0" value={numPeople} onChange={(e)=>{setNumPeople(e.target.value)}}/>
         </label>
       </form>
 
@@ -39,7 +66,7 @@ function App() {
             <h2>tip amount</h2>
             <p>/ person</p>
             </div>
-          <p className="tip-value">$34.55</p>
+         <p>${tipPerPerson}</p>
         </div>
 
         <div id="calc-total-tip">
@@ -47,11 +74,11 @@ function App() {
           <h2>total</h2>
           <p>/ person</p>
          </div>
-          <p className="tip-value">$50.85</p>
+     <p>${totalPerPerson}</p>
         </div>
       </div>
 
-      <button id="reset-btn">RESET</button>
+      <button id="reset-btn" onClick={clearInput}>RESET</button>
         
       </div>
     </div>  
